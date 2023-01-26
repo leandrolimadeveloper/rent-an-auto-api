@@ -1,7 +1,9 @@
 import { Router } from "express";
 
-import { CreateCategoryService } from '../services/CreateCategoryService';
 import { CategoriesRepository } from '../repositories/CategoriesRepository';
+
+import { CreateCategoryService } from '../services/CreateCategoryService';
+import { ListCategoryService } from '../services/ListCategoryService';
 
 const categoriesRoutes = Router();
 
@@ -18,9 +20,12 @@ categoriesRoutes.post("/", (request, response) => {
 });
 
 categoriesRoutes.get('/', (request, response) => {
-    const all = categoriesRepository.list()
+    // const all = categoriesRepository.list()
+    const listCategoryService = new ListCategoryService(categoriesRepository)
+    
+    listCategoryService.execute()
 
-    return response.json(all)
+    return response.json(listCategoryService)
 })
 
 export { categoriesRoutes };
