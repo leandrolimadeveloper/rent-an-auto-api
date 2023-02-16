@@ -8,8 +8,9 @@ const upload = multer({
     dest: "./tmp"
 })
 
-import { createCategoryController } from "../modules/useCases/createCategory";
-import { listCategoriesController } from "../modules/useCases/listCategories";
+import { createCategoryController } from "../modules/useCases/Category/createCategory";
+import { listCategoriesController } from "../modules/useCases/Category/listCategories";
+import { importCategoryController } from "../modules/useCases/Category/importCategory";
 
 categoriesRoutes.post("/", (request, response) => {
     return createCategoryController.handle(request, response)
@@ -20,9 +21,7 @@ categoriesRoutes.get("/", (request, response) => {
 });
 
 categoriesRoutes.post('/import', upload.single("file"), (request, response) => {
-    const { file } = request
-    console.log(file)
-    return response.send()
+    return importCategoryController.handle(request, response)
 })
 
 export { categoriesRoutes };
