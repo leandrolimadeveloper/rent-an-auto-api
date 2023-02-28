@@ -17,6 +17,7 @@ categoriesRoutes.post("/", (request, response) => {
 });
 
 categoriesRoutes.get("/", (request, response) => {
+    // console.log('Olá')
     return listCategoriesController.handle(request, response)
 });
 
