@@ -1,6 +1,17 @@
 version: "3.7"
 
 services:
+    db_rentacar: 
+        image: postgres
+        container_name: db_rentacar
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_USER=docker
+            - POSTGRES_PASSWORD=ignitepassrentx
+            - POSTGRES_DB=rentx
+        volumes:
+            - pgdata:/data/postgres
     app: 
         build: .
         container_name: rentx
@@ -8,3 +19,11 @@ services:
             - 3333:3333
         volumes:
             - .:/usr/app
+        links:
+            - db_rentacar
+        depends_on:
+            - db_rentacar
+
+volumes:
+    pgdata: 
+        driver: local
