@@ -4,6 +4,7 @@ services:
     db_rentacar: 
         image: postgres
         container_name: db_rentacar
+        restart: always
         ports:
             - 5432:5432
         environment:
