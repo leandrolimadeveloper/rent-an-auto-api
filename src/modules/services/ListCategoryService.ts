@@ -1,4 +1,4 @@
-import { CategoriesRepository } from "../repositories/implementations/CategoriesRepository";
+import { CategoriesRepository } from '../repositories/implementations/CategoriesRepository';
 
 class ListCategoryService {
     constructor(private categoriesRepository: CategoriesRepository) {}
@@ -7,4 +7,4 @@ class ListCategoryService {
     }
 }
 
-export { ListCategoryService }; 
+export { ListCategoryService };
