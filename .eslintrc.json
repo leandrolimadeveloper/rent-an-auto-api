@@ -3,10 +3,13 @@
     "plugins": ["prettier"],
     "extends": ["plugin:@typescript-eslint/recommended"],
     "rules": {
-      "prettier/prettier": ["error", {
-        "singleQuote": true,
-        "semi": true
-      }]
+        "prettier/prettier": [
+            "error",
+            {
+                "singleQuote": true,
+                "semi": true,
+                "printWidth": 120
+            }
+        ]
     }
-  }
-  
+}

@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-    db_rentacar: 
+    db_rentacar:
         image: postgres
         container_name: db_rentacar
         restart: always
@@ -13,10 +13,10 @@ services:
             - POSTGRES_DB=rentx
         volumes:
             - pgdata:/data/postgres
-    app: 
+    app:
         build: .
         container_name: rentx
-        ports: 
+        ports:
             - 3333:3333
         volumes:
             - .:/usr/app
@@ -26,5 +26,5 @@ services:
             - db_rentacar
 
 volumes:
-    pgdata: 
+    pgdata:
         driver: local
