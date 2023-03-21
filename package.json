@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --poll --inspect --transpile-only --ignore-watch node_modules --respawn ./src/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --poll --inspect --transpile-only --ignore-watch node_modules --respawn ./src/server.ts",
     "lint": "eslint --fix .",
     "format": "prettier --write .",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "test": "jest"
   },
   "repository": {
@@ -51,9 +51,11 @@
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
+    "json5": "^2.2.3",
     "prettier": "^2.8.4",
     "ts-jest": "^29.0.5",
     "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.1.2",
     "typescript": "^4.9.4"
   }
 }
