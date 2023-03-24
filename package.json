@@ -7,7 +7,8 @@
     "lint": "eslint --fix .",
     "format": "prettier --write .",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "test": "jest"
+    "test": "jest",
+    "seed:admin": "ts-node-dev ./src/shared/infra/typeorm/seed/admin.ts"
   },
   "repository": {
     "type": "git",
