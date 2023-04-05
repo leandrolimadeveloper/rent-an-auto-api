@@ -12,7 +12,7 @@ async function create() {
     await connection.query(
         `
         INSERT INTO USERS(id, name, email, password, "isAdmin", driver_license, created_at)
-        values('${id}', 'admin', 'admin2@rentx.com', '${password}', 'true', 'ABC123456', 'now()')
+        values('${id}', 'admin', 'admin5@rentx.com', '${password}', 'true', 'ABC123456', 'now()')
         `
     );
 
@@ -20,3 +20,4 @@ async function create() {
 }
 
 create().then(() => console.log('User admin created'));
+
