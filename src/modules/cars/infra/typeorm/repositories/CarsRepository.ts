@@ -20,6 +20,8 @@ class CarsRepository implements ICarsRepository {
             fine_amount: data.fine_amount,
             license_plate: data.license_plate,
             daily_rate: data.daily_rate,
+            specifications: data.specifications,
+            id: data.id,
         });
 
         await this.repository.save(car);
@@ -29,6 +31,12 @@ class CarsRepository implements ICarsRepository {
 
     async findByLicensePlate(license_plate: string): Promise<Car> {
         const car = await this.repository.findOne({ license_plate });
+
+        return car;
+    }
+
+    async findById(id: string): Promise<Car> {
+        const car = await this.repository.findOne(id);
 
         return car;
     }
