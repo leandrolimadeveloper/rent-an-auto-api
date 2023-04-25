@@ -3,6 +3,7 @@ import utc from 'dayjs/plugin/utc';
 import { AppError } from '@shared/infra/http/errors/AppError';
 import { IRentalsRepository } from '../repositories/IRentalsRepository';
 import { Rental } from '../infra/typeorm/entities/Rental';
+import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
 
 dayjs.extend(utc);
 
@@ -13,7 +14,7 @@ interface IRequest {
 }
 
 class CreateRentalUseCase {
-    constructor(private rentalsRepository: IRentalsRepository) {}
+    constructor(private rentalsRepository: IRentalsRepository, private dateProvider: IDateProvider) {}
 
     async execute({ user_id, car_id, expected_return_date }: IRequest): Promise<Rental> {
         const minimumHoursForRentACar = 24;
@@ -30,10 +31,8 @@ class CreateRentalUseCase {
             throw new AppError('User already have a rental of a car in progress.');
         }
 
-        const expectedReturnDateFormat = dayjs(expected_return_date).utc().local().format();
-
-        const dateNow = dayjs().utc().local().format();
-        const compare = dayjs(expectedReturnDateFormat).diff(dateNow, 'hours');
+        const dateNow = this.dateProvider.dateNow();
+        const compare = this.dateProvider.compareInHours(expected_return_date, dateNow);
 
         console.log('Compare date', compare);
 
