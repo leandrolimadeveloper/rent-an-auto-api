@@ -1,8 +1,8 @@
+import dayjs from 'dayjs';
+import { DayjsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider';
 import { AppError } from '@shared/infra/http/errors/AppError';
 import { RentalsRepositoryInMemory } from '../repositories/in-memory/RentalsRepositoryInMemory';
 import { CreateRentalUseCase } from './CreateRentalUseCase';
-import dayjs from 'dayjs';
-import { DayjsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider';
 
 let createRentalUseCase: CreateRentalUseCase;
 let rentalsRepositoryInMemory: RentalsRepositoryInMemory;
