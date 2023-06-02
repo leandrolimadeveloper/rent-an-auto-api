@@ -1,6 +1,7 @@
 import { CarsRepositoryInMemory } from '@modules/cars/repositories/in-memory/CarsRepositoryInMemory';
-import { AppError } from '@shared/infra/http/errors/AppError';
 import { CreateCarUseCase } from './CreateCarUseCase';
+
+import { AppError } from '@shared/infra/http/errors/AppError';
 
 let carsRepositoryInMemory: CarsRepositoryInMemory;
 let createCarUseCase: CreateCarUseCase;
@@ -26,18 +27,18 @@ describe('Create Car', () => {
     });
 
     it('should not be able to create a new car if license plate already exists', async () => {
-        expect(async () => {
-            await createCarUseCase.execute({
-                name: 'Name Car 1',
-                description: 'Description Car',
-                daily_rate: 100,
-                license_plate: 'ABC-123',
-                fine_amount: 80,
-                brand: 'Brand',
-                category_id: 'category',
-            });
+        await createCarUseCase.execute({
+            name: 'Name Car 1',
+            description: 'Description Car',
+            daily_rate: 100,
+            license_plate: 'ABC-123',
+            fine_amount: 80,
+            brand: 'Brand',
+            category_id: 'category',
+        });
 
-            await createCarUseCase.execute({
+        await expect(async () => {
+            createCarUseCase.execute({
                 name: 'Name Car 2',
                 description: 'Description Car',
                 daily_rate: 100,
@@ -46,7 +47,7 @@ describe('Create Car', () => {
                 brand: 'Brand',
                 category_id: 'category',
             });
-        }).rejects.toBeInstanceOf(AppError);
+        }).rejects.toEqual(new AppError('Car already exists'));
     });
 
     it('should be able to create a new car with availability setted as true', async () => {
@@ -60,6 +61,6 @@ describe('Create Car', () => {
             category_id: 'category',
         });
 
-        expect(car.available).toBe(true);
+        expect(car.available).toEqual(true);
     });
 });

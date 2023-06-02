@@ -9,14 +9,16 @@ class CreateRentalController {
         const { car_id, expected_return_date } = request.body;
 
         const createRentalUseCase = container.resolve(CreateRentalUseCase);
-
-        const rental = await createRentalUseCase.execute({
-            car_id,
-            expected_return_date,
-            user_id: id,
-        });
-
-        return response.status(201).json(rental);
+        try {
+            const rental = await createRentalUseCase.execute({
+                car_id,
+                expected_return_date,
+                user_id: id,
+            });
+            return response.status(201).json(rental);
+        } catch (err) {
+            throw new Error(err);
+        }
     }
 }
 

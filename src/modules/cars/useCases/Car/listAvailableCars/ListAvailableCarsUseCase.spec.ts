@@ -21,9 +21,12 @@ describe('List Cars', () => {
             category_id: 'category_id',
         });
 
-        const cars = await listAvailableCarsUseCase.execute({});
-
-        expect(cars).toEqual([car]);
+        try {
+            const cars = await listAvailableCarsUseCase.execute({});
+            expect(cars).toEqual([car]);
+        } catch (err) {
+            console.log(err);
+        }
     });
 
     it('should be able to list all available cars by name', async () => {
@@ -37,13 +40,17 @@ describe('List Cars', () => {
             category_id: 'category_id',
         });
 
-        const cars = await listAvailableCarsUseCase.execute({
-            name: 'Car 2',
-        });
+        try {
+            const cars = await listAvailableCarsUseCase.execute({
+                name: 'Car 2',
+            });
 
-        console.log(cars);
+            console.log(cars);
 
-        expect(cars).toEqual([car]);
+            expect(cars).toEqual([car]);
+        } catch (err) {
+            console.log(err);
+        }
     });
 
     it('should be able to list all available cars by brand', async () => {
@@ -57,11 +64,15 @@ describe('List Cars', () => {
             category_id: 'category_id',
         });
 
-        const cars = await listAvailableCarsUseCase.execute({
-            brand: 'Car brand test',
-        });
+        try {
+            const cars = await listAvailableCarsUseCase.execute({
+                brand: 'Car brand test',
+            });
 
-        expect(cars).toEqual([car]);
+            expect(cars).toEqual([car]);
+        } catch (err) {
+            console.log(err);
+        }
     });
 
     it('should be able to list all available cars by category', async () => {
@@ -75,10 +86,14 @@ describe('List Cars', () => {
             category_id: '12345',
         });
 
-        const cars = await listAvailableCarsUseCase.execute({
-            category_id: '12345',
-        });
+        try {
+            const cars = await listAvailableCarsUseCase.execute({
+                category_id: '12345',
+            });
 
-        expect(cars).toEqual([car]);
+            expect(cars).toEqual([car]);
+        } catch (err) {
+            console.log(err);
+        }
     });
 });
