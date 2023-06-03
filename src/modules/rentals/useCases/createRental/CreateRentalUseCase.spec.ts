@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
-import { DayjsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider';
 
 import { RentalsRepositoryInMemory } from '../../repositories/in-memory/RentalsRepositoryInMemory';
 import { CarsRepositoryInMemory } from '@modules/cars/repositories/in-memory/CarsRepositoryInMemory';
+import { DayjsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider';
 
 import { CreateRentalUseCase } from './CreateRentalUseCase';
 
@@ -29,6 +29,7 @@ describe('Create Rental', () => {
 
     it(' should be able to create a new rental', async () => {
         const car = await carsRepositoryInMemory.create({
+            id: '123',
             name: 'Test',
             description: 'Car Test',
             daily_rate: 100,
