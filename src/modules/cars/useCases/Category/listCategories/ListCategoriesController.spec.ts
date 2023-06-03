@@ -36,8 +36,6 @@ describe('Create Category Controller', () => {
 
         const { token } = responseToken.body;
 
-        console.log('Token', responseToken.body);
-
         await request(app)
             .post('/categories')
             .send({
