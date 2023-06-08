@@ -46,8 +46,11 @@ jspm_packages/
 tmp/*
 !tmp/.gitkeep
 
-#ORM Config
+# ORM Config
 ormconfig.json
+
+# Coverage Report
+coverage
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -126,8 +129,9 @@ dist
 # TernJS port file
 .tern-port
 
-# Stores VSCode versions used for testing VSCode extensions
+# Stores VSCode versions used for testing VSCode extensions and others
 .vscode-test
+.vscode
 
 # yarn v2
 .yarn/cache
