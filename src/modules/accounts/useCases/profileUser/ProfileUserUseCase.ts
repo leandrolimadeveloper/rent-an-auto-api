@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
 import { IUserResponseDTO } from '@modules/accounts/dtos/IUserResponseDTO';
+
 import { UserMap } from '@modules/accounts/mapper/UserMap';
 
 @injectable()
