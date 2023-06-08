@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "dev": "ts-node-dev -r tsconfig-paths/register --poll --inspect --transpile-only --ignore-watch node_modules --respawn ./src/shared/infra/http/server.ts",
     "lint": "eslint --fix .",
     "format": "prettier --write .",

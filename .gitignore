@@ -43,7 +43,9 @@ node_modules/
 jspm_packages/
 
 # tmp folder
-tmp/
+tmp/*
+!tmp/.gitkeep
+
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
