@@ -1,5 +1,6 @@
-import { pathsToModuleNameMapper } from 'ts-jest';
-import { compilerOptions } from './tsconfig.json';
+import { pathsToModuleNameMapper } from 'ts-jest'
+
+import { compilerOptions } from './tsconfig.json'
 
 /*
  * For a detailed explanation regarding each configuration property and type check, visit:
@@ -11,7 +12,7 @@ export default {
     // automock: false,
 
     // Stop running tests after `n` failures
-    bail: true,
+    bail: false,
 
     // The directory where Jest should store its cached dependency information
     // cacheDirectory: "C:\\Users\\Leandro\\AppData\\Local\\Temp\\jest",
@@ -151,7 +152,7 @@ export default {
     // testLocationInResults: false,
 
     // The glob patterns Jest uses to detect test files
-    testMatch: ['**/*.spec.ts'],
+    testMatch: ['**/*.spec.ts']
 
     // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
     // testPathIgnorePatterns: [
@@ -187,4 +188,4 @@ export default {
 
     // Whether to use watchman for file crawling
     // watchman: true,
-};
+}

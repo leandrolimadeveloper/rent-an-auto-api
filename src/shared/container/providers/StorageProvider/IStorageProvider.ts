@@ -3,4 +3,4 @@ interface IStorageProvider {
     delete(file: string, folder: string): Promise<void>;
 }
 
-export { IStorageProvider };
+export { IStorageProvider }

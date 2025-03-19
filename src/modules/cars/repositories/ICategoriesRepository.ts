@@ -1,4 +1,4 @@
-import { Category } from '../infra/typeorm/entities/Category';
+import { Category } from '../infra/typeorm/entities/Category'
 
 interface ICreateCategoryDTO {
     name: string;
@@ -11,4 +11,4 @@ interface ICategoriesRepository {
     create({ name, description }: ICreateCategoryDTO): Promise<void>;
 }
 
-export { ICategoriesRepository, ICreateCategoryDTO };
+export { ICategoriesRepository, ICreateCategoryDTO }

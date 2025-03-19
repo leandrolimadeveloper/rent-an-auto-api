@@ -1,29 +1,16 @@
-version: "3.7"
-
 services:
     db_rentacar:
         image: postgres
         container_name: db_rentacar
         restart: always
         ports:
-            - 64324:5432
+            - 5432:5432
         environment:
             - POSTGRES_USER=docker
-            - POSTGRES_PASSWORD=YORX3cO3OK5AdBl
-            - POSTGRES_DB=rentx
+            - POSTGRES_PASSWORD=dockerpass
+            - POSTGRES_DB=rent-an-auto
         volumes:
             - pgdata:/data/postgres
-    app:
-        build: .
-        container_name: rentx
-        ports:
-            - 3333:3333
-        volumes:
-            - .:/usr/app
-        links:
-            - db_rentacar
-        depends_on:
-            - db_rentacar
 
 volumes:
     pgdata:

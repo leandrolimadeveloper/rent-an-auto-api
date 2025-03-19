@@ -1,17 +1,17 @@
-import { IMailProvider } from '../IMailProvider';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { IMailProvider } from '../IMailProvider'
 
 class MailProviderInMemory implements IMailProvider {
-    private message: any[] = [];
+    private message: any[] = []
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async sendMail(to: string, subject: string, variables: any, path: string): Promise<void> {
         this.message.push({
             to,
             subject,
             variables,
-            path,
-        });
+            path
+        })
     }
 }
 
-export { MailProviderInMemory };
+export { MailProviderInMemory }

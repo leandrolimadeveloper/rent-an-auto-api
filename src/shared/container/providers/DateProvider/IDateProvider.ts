@@ -8,4 +8,4 @@ interface IDateProvider {
     compareIfBefore(start: Date, end_date: Date): boolean;
 }
 
-export { IDateProvider };
+export { IDateProvider }

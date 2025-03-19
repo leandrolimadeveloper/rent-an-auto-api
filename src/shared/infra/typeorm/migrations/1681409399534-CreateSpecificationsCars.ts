@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm'
 
 export class CreateSpecificationsCars1681396402257 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
@@ -8,20 +8,20 @@ export class CreateSpecificationsCars1681396402257 implements MigrationInterface
                 columns: [
                     {
                         name: 'car_id',
-                        type: 'uuid',
+                        type: 'uuid'
                     },
                     {
                         name: 'specification_id',
-                        type: 'uuid',
+                        type: 'uuid'
                     },
                     {
                         name: 'created_at',
                         type: 'timestamp',
-                        default: 'now()',
-                    },
-                ],
+                        default: 'now()'
+                    }
+                ]
             })
-        );
+        )
         await queryRunner.createForeignKey(
             'specifications_cars',
             new TableForeignKey({
@@ -30,9 +30,9 @@ export class CreateSpecificationsCars1681396402257 implements MigrationInterface
                 referencedColumnNames: ['id'],
                 columnNames: ['specification_id'],
                 onDelete: 'SET NULL',
-                onUpdate: 'SET NULL',
+                onUpdate: 'SET NULL'
             })
-        );
+        )
         await queryRunner.createForeignKey(
             'specifications_cars',
             new TableForeignKey({
@@ -41,14 +41,14 @@ export class CreateSpecificationsCars1681396402257 implements MigrationInterface
                 referencedColumnNames: ['id'],
                 columnNames: ['car_id'],
                 onDelete: 'SET NULL',
-                onUpdate: 'SET NULL',
+                onUpdate: 'SET NULL'
             })
-        );
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropForeignKey('specifications_cars', 'FKSpecificationCar');
-        await queryRunner.dropForeignKey('specifications_cars', 'FKCarSpecification');
-        await queryRunner.dropTable('specifications_cars');
+        await queryRunner.dropForeignKey('specifications_cars', 'FKSpecificationCar')
+        await queryRunner.dropForeignKey('specifications_cars', 'FKCarSpecification')
+        await queryRunner.dropTable('specifications_cars')
     }
 }

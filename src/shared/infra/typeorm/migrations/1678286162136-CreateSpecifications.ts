@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
 export class CreateSpecifications1678286162136 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
@@ -9,27 +9,27 @@ export class CreateSpecifications1678286162136 implements MigrationInterface {
                     {
                         name: 'id',
                         type: 'uuid',
-                        isPrimary: true,
+                        isPrimary: true
                     },
                     {
                         name: 'name',
-                        type: 'varchar',
+                        type: 'varchar'
                     },
                     {
                         name: 'description',
-                        type: 'varchar',
+                        type: 'varchar'
                     },
                     {
                         name: 'created_at',
                         type: 'timestamp',
-                        default: 'now()',
-                    },
-                ],
+                        default: 'now()'
+                    }
+                ]
             })
-        );
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('specifications');
+        await queryRunner.dropTable('specifications')
     }
 }

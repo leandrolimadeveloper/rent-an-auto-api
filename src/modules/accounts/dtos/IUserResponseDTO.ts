@@ -7,4 +7,4 @@ interface IUserResponseDTO {
     avatarUrl(): string;
 }
 
-export { IUserResponseDTO };
+export { IUserResponseDTO }

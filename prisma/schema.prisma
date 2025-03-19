@@ -1,0 +1,97 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Category {
+    id          String   @id @default(uuid())
+    name        String
+    description String
+    createdAt   DateTime @default(now())
+    Cars        Car[]
+}
+
+model Specification {
+    id          String             @id @default(uuid())
+    name        String
+    description String
+    createdAt   DateTime           @default(now())
+    carId       String?
+    cars        SpecificationCar[]
+}
+
+model SpecificationCar {
+    id               String        @id @default(uuid())
+    car_id           String
+    specification_id String
+    createdAt        DateTime      @default(now())
+    car              Car           @relation(fields: [car_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    specification    Specification @relation(fields: [specification_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+    @@unique([car_id, specification_id])
+}
+
+model User {
+    id             String      @id @default(uuid())
+    name           String
+    email          String      @unique
+    password       String
+    driver_license String
+    isAdmin        Boolean     @default(false)
+    avatar         String?
+    createdAt      DateTime    @default(now())
+    Rentals        Rental[]
+    Tokens         UserToken[]
+}
+
+model Car {
+    id             String             @id @default(uuid())
+    name           String
+    description    String
+    dailyRate      Float
+    available      Boolean            @default(true)
+    licensePlate   String
+    fineAmount     Float
+    brand          String
+    categoryId     String?
+    category       Category?          @relation(fields: [categoryId], references: [id])
+    specifications SpecificationCar[]
+    images         CarImage[]
+    createdAt      DateTime           @default(now())
+    Rentals        Rental[]
+}
+
+model CarImage {
+    id        String   @id @default(uuid())
+    carId     String
+    car       Car      @relation(fields: [carId], references: [id])
+    imageName String
+    createdAt DateTime @default(now())
+}
+
+model Rental {
+    id                 String    @id @default(uuid())
+    carId              String
+    car                Car       @relation(fields: [carId], references: [id])
+    userId             String
+    user               User      @relation(fields: [userId], references: [id])
+    startDate          DateTime  @default(now())
+    endDate            DateTime?
+    expectedReturnDate DateTime
+    total              Float?
+    createdAt          DateTime  @default(now())
+    updatedAt          DateTime  @default(now())
+}
+
+model UserToken {
+    id           String   @id @default(uuid())
+    refreshToken String
+    userId       String
+    user         User     @relation(fields: [userId], references: [id])
+    expiresDate  DateTime
+    createdAt    DateTime @default(now())
+}

@@ -1,19 +1,18 @@
-import { Router } from 'express';
+import { CreateRentalController } from '@modules/rentals/useCases/createRental/CreateRentalController'
+import { ListRentalsByUserController } from '@modules/rentals/useCases/listRentalsByUser/ListRentalsByUserController'
+import { ReturnRentalController } from '@modules/rentals/useCases/returnRental/ReturnRentalController'
+import { Router } from 'express'
 
-import { CreateRentalController } from '@modules/rentals/useCases/createRental/CreateRentalController';
-import { ReturnRentalController } from '@modules/rentals/useCases/returnRental/ReturnRentalController';
-import { ListRentalsByUserController } from '@modules/rentals/useCases/listRentalsByUser/ListRentalsByUserController';
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 
-import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
+const rentalsRoutes = Router()
 
-const rentalsRoutes = Router();
+const createRentalController = new CreateRentalController()
+const returnRentalController = new ReturnRentalController()
+const listRentalsByUserController = new ListRentalsByUserController()
 
-const createRentalController = new CreateRentalController();
-const returnRentalController = new ReturnRentalController();
-const listRentalsByUserController = new ListRentalsByUserController();
+rentalsRoutes.post('/', ensureAuthenticated, createRentalController.handle)
+rentalsRoutes.post('/return/:id', ensureAuthenticated, returnRentalController.handle)
+rentalsRoutes.get('/user', ensureAuthenticated, listRentalsByUserController.handle)
 
-rentalsRoutes.post('/', ensureAuthenticated, createRentalController.handle);
-rentalsRoutes.post('/return/:id', ensureAuthenticated, returnRentalController.handle);
-rentalsRoutes.get('/user', ensureAuthenticated, listRentalsByUserController.handle);
-
-export { rentalsRoutes };
+export { rentalsRoutes }

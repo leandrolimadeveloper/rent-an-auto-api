@@ -7,4 +7,4 @@ interface ICreateRentalDTO {
     total?: number;
 }
 
-export { ICreateRentalDTO };
+export { ICreateRentalDTO }

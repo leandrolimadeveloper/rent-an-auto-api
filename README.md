@@ -1,96 +1,110 @@
-# Cadastro de carro
+# Index
 
-**RF**
-- Deve ser possível cadastrar um novo carro.
+- [About](#about)
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [Running Tests](#running-tests)
+- [Features](#features)
 
+---
 
-**RN** 
-- Não deve ser possível cadastrar um carro com uma placa já existente.
-- O carro deve ser cadastrado, por padrão, com disponibilidade.
-- O usuário responsável pelo cadastro deve ser um usuário administrador.
+## About
 
-# Listagem de carros
+Rent an Auto is an API designed to manage car rentals efficiently. The system provides functionalities for car registration, rental management, and user authentication. It ensures that only administrators can manage car listings, while users can search for available cars and rent them. The API also includes features for managing car specifications, uploading car images, handling returns, and processing user authentication and password recovery.
 
-**RF** 
-- Deve ser possível listar todos os carros disponíveis
-- Deve ser possível listar todos os carros disponíveis pelo - nome da categoria
-- Deve ser possível listar todos os carros disponíveis pelo - nome da marca
-- Deve ser possível listar todos os carros disponíveis pelo - nome do carro
+## Technologies
 
-**RN**
-- O usuário não precisar estar logado no sistema.
+- TypeScript
+- Express
+- Jest
+- PostgreSQL
+- TypeORM
+- Multer (for file uploads)
 
+## Installation
 
-# Cadastro de Especificação no carro
+```sh
+# Clone the repository
+git clone https://github.com/leandrolimadeveloper/rent-an-auto-api.git
+cd rent-an-auto
 
-**RF**
-- Deve ser possível cadastrar uma especificação para um carro
+# Install dependencies
+npm install
 
+# Set up environment variables
+cp .env.example .env
 
-**RN**
-- Não deve ser possível cadastrar uma especificação para um - carro não cadastrado.
-- Não deve ser possível cadastrar uma especificação já - existente para o mesmo carro.
-- O usuário responsável pelo cadastro deve ser um usuário - administrador.
+Update the .env file with the necessary credentials. Use the .env.example file as a reference.
 
+# Start the database container (PostgreSQL)
+docker compose up
+or
+docker compose up -d   # run in detached mode
 
-# Cadastro de imagens do carro
+# Start the application
+npm run dev
 
-**RF**
-- Deve ser possível cadastrar a imagem do carro
+# Run migrations
+npm run typeorm migrations:run
+```
 
-**RNF**
-- Utilizar o multer para upload dos arquivos
+## Features
 
-**RN**
-- O usuário deve poder cadastrar mais de uma imagem para o - mesmo carro
-- O usuário responsável pelo cadastro deve ser um usuário - administrador.
+### Car Registration
 
+- Register a new car
+- Prevent duplicate license plate registration
+- Set the car as available by default
+- Ensure only administrators can register cars
 
-# Alugel de carro
+### Car Listing
 
-**RF**
-- Deve ser possível cadastrar um aluguel
+- List all available cars
+- Filter available cars by category, brand, or name
+- Users do not need to be logged in to view available cars
 
+### Car Specification Management
 
-**RN**
-- O aluguel deve ter duração mínima de 24 horas.
-- Não deve ser possível cadastrar um novo aluguel caso já - exista um aberto para o mesmo usuário
-- Não deve ser possível cadastrar um novo aluguel caso já - exista um aberto para o mesmo carro
-- O usuário deve estar logado na aplicação
-- Ao realizar um aluguel, o status do carro deverá ser - alterado para indisponível
+- Add specifications to a car
+- Prevent adding specifications to non-registered cars
+- Prevent duplicate specifications for the same car
+- Ensure only administrators can add specifications
 
+### Car Image Upload
 
-# Devolução de carro 
+- Upload car images
+- Allow multiple images for a car
+- Ensure only administrators can upload images
+- Uses Multer for file handling
 
-**RF**
-- Deve ser possível realizar a devolução de um carro
+### Car Rental
 
-**RN**
-- Se o carro for devolvido com menos de 24 horas, deverá - ser cobrado diária completa.
-- Ao realizar a devolução, o carro deverá ser liberado para - outro aluguel.
-- Ao realizar a devolução, o usuário deverá ser liberado - para outro aluguel.
-- Ao realizar a devolução, deverá ser calculado o total do - aluguel. 
-- Caso o horário de devolução seja superior ao horário - previsto de entrega, deverá ser cobrado multa - proporcional aos dias de atraso.
-- Caso haja multa, deverá ser somado ao total do aluguel.
-- O usuário deve estar logado na aplicação
+- Register a new rental
+- Enforce a minimum rental duration of 24 hours
+- Prevent users from having multiple open rentals
+- Prevent cars from being rented by multiple users simultaneously
+- Require users to be logged in to rent a car
+- Change car status to unavailable upon rental
 
+### Car Return
 
-# Listagem de Alugueis para usuário
+- Process car returns
+- Charge a full-day fee if returned within 24 hours
+- Mark the car as available for rental after return
+- Allow users to rent another car after return
+- Calculate total rental cost, including late return fees
+- Charge a late fee for overdue returns
+- Require users to be logged in to return a car
 
-**RF**
-- Deve ser possível realizar a busca de todos os alugueis para o usuário
+### Rental History
 
-**RN**
-- O usuário deve estar logado na aplicação
+- Retrieve all rentals associated with a user
+- Require users to be logged in to view rental history
 
+### Password Recovery
 
-# Recuperar Senha
-
-**RF**
-- Deve ser possível o usuário recuperar a senha informando o e-mail
-- O usuário deve receber um e-mail com o passo a passo para a recuperação da senha
-- O usuário deve conseguir inserir uma nova senha
-
-**RN**
-- O usuário precisa informar uma nova senha
-- O link enviado para a recuperação deve expirar em 3 horas
+- Allow users to request password recovery via email
+- Send an email with recovery instructions
+- Enable users to set a new password
+- Require users to enter a new password
+- Set a recovery link expiration time of 3 hours

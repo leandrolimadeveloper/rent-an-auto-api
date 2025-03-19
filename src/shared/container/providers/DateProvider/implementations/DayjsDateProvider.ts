@@ -1,44 +1,44 @@
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 
-import { IDateProvider } from '../IDateProvider';
+import { IDateProvider } from '../IDateProvider'
 
-dayjs.extend(utc);
+dayjs.extend(utc)
 
 class DayjsDateProvider implements IDateProvider {
     dateNow(): Date {
-        return dayjs().toDate();
+        return dayjs().toDate()
     }
 
     convertToUtc(date: Date): string {
-        return dayjs(date).utc().local().format();
+        return dayjs(date).utc().local().format()
     }
 
     compareInHours(end_date: Date, start_date: Date): number {
-        const end_date_utc = this.convertToUtc(end_date);
-        const start_date_utc = this.convertToUtc(start_date);
+        const end_date_utc = this.convertToUtc(end_date)
+        const start_date_utc = this.convertToUtc(start_date)
 
-        return dayjs(end_date_utc).diff(start_date_utc, 'hours');
+        return dayjs(end_date_utc).diff(start_date_utc, 'hours')
     }
 
     compareInDays(start_date: Date, end_date: Date): number {
-        const end_date_utc = this.convertToUtc(end_date);
-        const start_date_utc = this.convertToUtc(start_date);
+        const end_date_utc = this.convertToUtc(end_date)
+        const start_date_utc = this.convertToUtc(start_date)
 
-        return dayjs(end_date_utc).diff(start_date_utc, 'days');
+        return dayjs(end_date_utc).diff(start_date_utc, 'days')
     }
 
     addDays(days: number): Date {
-        return dayjs().add(days, 'days').toDate();
+        return dayjs().add(days, 'days').toDate()
     }
 
     addHours(hours: number): Date {
-        return dayjs().add(hours, 'hour').toDate();
+        return dayjs().add(hours, 'hour').toDate()
     }
 
     compareIfBefore(start_date: Date, end_date: Date): boolean {
-        return dayjs(start_date).isBefore(end_date);
+        return dayjs(start_date).isBefore(end_date)
     }
 }
 
-export { DayjsDateProvider };
+export { DayjsDateProvider }

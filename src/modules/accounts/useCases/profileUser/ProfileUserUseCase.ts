@@ -1,9 +1,7 @@
-import { inject, injectable } from 'tsyringe';
-
-import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
-import { IUserResponseDTO } from '@modules/accounts/dtos/IUserResponseDTO';
-
-import { UserMap } from '@modules/accounts/mapper/UserMap';
+import { IUserResponseDTO } from '@modules/accounts/dtos/IUserResponseDTO'
+import { UserMap } from '@modules/accounts/mapper/UserMap'
+import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository'
+import { inject, injectable } from 'tsyringe'
 
 @injectable()
 class ProfileUserUseCase {
@@ -13,10 +11,10 @@ class ProfileUserUseCase {
     ) {}
 
     async execute(id: string): Promise<IUserResponseDTO> {
-        const user = await this.usersRepository.findById(id);
+        const user = await this.usersRepository.findById(id)
 
-        return UserMap.toDTO(user);
+        return UserMap.toDTO(user)
     }
 }
 
-export { ProfileUserUseCase };
+export { ProfileUserUseCase }

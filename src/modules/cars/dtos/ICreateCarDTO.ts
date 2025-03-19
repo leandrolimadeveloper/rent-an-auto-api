@@ -1,4 +1,4 @@
-import { Specification } from '../infra/typeorm/entities/Specification';
+import { Specification } from '../infra/typeorm/entities/Specification'
 
 interface ICreateCarDTO {
     name: string;
@@ -12,4 +12,4 @@ interface ICreateCarDTO {
     id?: string;
 }
 
-export { ICreateCarDTO };
+export { ICreateCarDTO }

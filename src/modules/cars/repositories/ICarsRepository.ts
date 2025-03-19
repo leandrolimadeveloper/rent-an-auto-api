@@ -1,5 +1,5 @@
-import { ICreateCarDTO } from '../dtos/ICreateCarDTO';
-import { Car } from '../infra/typeorm/entities/Car';
+import { ICreateCarDTO } from '../dtos/ICreateCarDTO'
+import { Car } from '../infra/typeorm/entities/Car'
 
 interface ICarsRepository {
     create(data: ICreateCarDTO): Promise<Car>;
@@ -9,4 +9,4 @@ interface ICarsRepository {
     updateAvaiableCar(id: string, available: boolean): Promise<void>;
 }
 
-export { ICarsRepository };
+export { ICarsRepository }

@@ -1,12 +1,9 @@
-import { inject, injectable } from 'tsyringe';
-
-import { Rental } from '@modules/rentals/infra/typeorm/entities/Rental';
-
-import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsRepository';
-import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository';
-import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
-
-import { AppError } from '@shared/infra/http/errors/AppError';
+import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository'
+import { Rental } from '@modules/rentals/infra/typeorm/entities/Rental'
+import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsRepository'
+import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider'
+import { AppError } from '@shared/infra/http/errors/AppError'
+import { inject, injectable } from 'tsyringe'
 
 interface IRequest {
     id: string;
@@ -24,45 +21,45 @@ class ReturnRentalUseCase {
 
         @inject('DayjsDateProvider')
         private dateProvider: IDateProvider
-    ) {}
+    ) { }
 
-    async execute({ id, user_id }: IRequest): Promise<Rental> {
-        const rental = await this.rentalsRepository.findById(id);
-        const car = await this.carsRepository.findById(rental.car_id);
+    async execute({ id }: IRequest): Promise<Rental> {
+        const rental = await this.rentalsRepository.findById(id)
+        const car = await this.carsRepository.findById(rental.car_id)
 
-        const minimumDailyValue = 1;
+        const minimumDailyValue = 1
 
         if (!rental) {
-            throw new AppError('Rental does not exist');
+            throw new AppError('Rental does not exist')
         }
 
-        const dateNow = this.dateProvider.dateNow();
+        const dateNow = this.dateProvider.dateNow()
 
-        let daily = this.dateProvider.compareInDays(dateNow, rental.expected_return_date);
+        let daily = this.dateProvider.compareInDays(dateNow, rental.expected_return_date)
 
         if (daily <= 0) {
-            daily = minimumDailyValue;
+            daily = minimumDailyValue
         }
 
-        const delay = this.dateProvider.compareInDays(dateNow, rental.expected_return_date);
+        const delay = this.dateProvider.compareInDays(dateNow, rental.expected_return_date)
 
-        let total = 0;
+        let total = 0
 
         if (delay > 0) {
-            const calculate_fine_amount = delay * car.fine_amount;
-            total = calculate_fine_amount;
+            const calculate_fine_amount = delay * car.fine_amount
+            total = calculate_fine_amount
         }
 
-        total += daily * car.daily_rate;
+        total += daily * car.daily_rate
 
-        rental.end_date = this.dateProvider.dateNow();
-        rental.total = total;
+        rental.end_date = this.dateProvider.dateNow()
+        rental.total = total
 
-        await this.rentalsRepository.create(rental);
-        await this.carsRepository.updateAvaiableCar(car.id, true);
+        await this.rentalsRepository.create(rental)
+        await this.carsRepository.updateAvaiableCar(car.id, true)
 
-        return rental;
+        return rental
     }
 }
 
-export { ReturnRentalUseCase };
+export { ReturnRentalUseCase }

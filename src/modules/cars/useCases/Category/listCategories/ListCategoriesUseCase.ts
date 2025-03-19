@@ -1,6 +1,6 @@
-import { inject, injectable } from 'tsyringe';
-import { Category } from '@modules/cars/infra/typeorm/entities/Category';
-import { CategoriesRepository } from '@modules/cars/infra/typeorm/repositories/CategoriesRepository';
+import { Category } from '@modules/cars/infra/typeorm/entities/Category'
+import { CategoriesRepository } from '@modules/cars/infra/typeorm/repositories/CategoriesRepository'
+import { inject, injectable } from 'tsyringe'
 
 @injectable()
 class ListCategoriesUseCase {
@@ -10,9 +10,9 @@ class ListCategoriesUseCase {
     ) {}
 
     async execute(): Promise<Category[]> {
-        const categories = await this.categoriesRepository.list();
-        return categories;
+        const categories = await this.categoriesRepository.list()
+        return categories
     }
 }
 
-export { ListCategoriesUseCase };
+export { ListCategoriesUseCase }

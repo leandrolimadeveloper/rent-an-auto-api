@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
 export class CreateUsersTokens1685640215107 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
@@ -9,25 +9,25 @@ export class CreateUsersTokens1685640215107 implements MigrationInterface {
                     {
                         name: 'id',
                         type: 'uuid',
-                        isPrimary: true,
+                        isPrimary: true
                     },
                     {
                         name: 'refresh_token',
-                        type: 'varchar',
+                        type: 'varchar'
                     },
                     {
                         name: 'user_id',
-                        type: 'uuid',
+                        type: 'uuid'
                     },
                     {
                         name: 'expires_date',
-                        type: 'timestamp',
+                        type: 'timestamp'
                     },
                     {
                         name: 'created_at',
                         type: 'timestamp',
-                        default: 'now()',
-                    },
+                        default: 'now()'
+                    }
                 ],
                 foreignKeys: [
                     {
@@ -36,14 +36,14 @@ export class CreateUsersTokens1685640215107 implements MigrationInterface {
                         referencedColumnNames: ['id'],
                         columnNames: ['user_id'],
                         onDelete: 'CASCADE',
-                        onUpdate: 'CASCADE',
-                    },
-                ],
+                        onUpdate: 'CASCADE'
+                    }
+                ]
             })
-        );
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('users_tokens');
+        await queryRunner.dropTable('users_tokens')
     }
 }
