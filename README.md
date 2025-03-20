@@ -3,10 +3,11 @@
 - [About](#about)
 - [Technologies](#technologies)
 - [Installation](#installation)
-- [Running Tests](#running-tests)
-- [Features](#features)
+- [Functional Requirements, Non-Functional Requirements, and Business Rules](#functional-requirements-non-functional-requirements-and-business-rules)   
 
 ---
+![image](https://github.com/user-attachments/assets/3fd61e24-d061-4b98-aa28-3535ddb6b1d2)
+
 
 ## About
 
@@ -48,63 +49,98 @@ npm run dev
 npm run typeorm migrations:run
 ```
 
-## Features
+## Functional Requirements, Non-Functional Requirements, and Business Rules
+### **Functional Requirements (FR)**
 
-### Car Registration
+#### **Car Registration**
 
-- Register a new car
-- Prevent duplicate license plate registration
-- Set the car as available by default
-- Ensure only administrators can register cars
+- The system must allow the registration of a new car.
+- The system must set a car as available by default when registered.
 
-### Car Listing
+#### **Car Listing**
 
-- List all available cars
-- Filter available cars by category, brand, or name
-- Users do not need to be logged in to view available cars
+- The system must allow listing all available cars.
+- The system must allow filtering available cars by category, brand, or name.
+- The system must allow users to view cars without requiring login.
 
-### Car Specification Management
+#### **Car Specification Management**
 
-- Add specifications to a car
-- Prevent adding specifications to non-registered cars
-- Prevent duplicate specifications for the same car
-- Ensure only administrators can add specifications
+- The system must allow adding specifications to a car.
 
-### Car Image Upload
+#### **Car Image Upload**
 
-- Upload car images
-- Allow multiple images for a car
-- Ensure only administrators can upload images
-- Uses Multer for file handling
+- The system must allow uploading car images.
+- The system must allow uploading multiple images per car.
 
-### Car Rental
+#### **Car Rental**
 
-- Register a new rental
-- Enforce a minimum rental duration of 24 hours
-- Prevent users from having multiple open rentals
-- Prevent cars from being rented by multiple users simultaneously
-- Require users to be logged in to rent a car
-- Change car status to unavailable upon rental
+- The system must allow registering a new rental.
+- The system must allow only authenticated users to rent a car.
+- The system must change the car's status to **unavailable** after rental.
 
-### Car Return
+#### **Car Return**
 
-- Process car returns
-- Charge a full-day fee if returned within 24 hours
-- Mark the car as available for rental after return
-- Allow users to rent another car after return
-- Calculate total rental cost, including late return fees
-- Charge a late fee for overdue returns
-- Require users to be logged in to return a car
+- The system must allow processing car returns.
+- The system must mark the car as **available** for rental after return.
+- The system must calculate the total rental cost, including any late fees if applicable.
 
-### Rental History
+#### **Rental History**
 
-- Retrieve all rentals associated with a user
-- Require users to be logged in to view rental history
+- The system must allow users to retrieve all rentals associated with them.
+- The system must require users to be authenticated to view their rental history.
 
-### Password Recovery
+#### **Password Recovery**
 
-- Allow users to request password recovery via email
-- Send an email with recovery instructions
-- Enable users to set a new password
-- Require users to enter a new password
-- Set a recovery link expiration time of 3 hours
+- The system must allow users to request password recovery via email.
+- The system must send an email with instructions to reset the password.
+- The system must allow users to set a new password.
+
+---
+
+### **Non-Functional Requirements (NFR)**
+
+- The system must use **Multer** for file handling in image uploads.
+- The system must use a **PostgreSQL database** to store information.
+- The password recovery link must expire **after 3 hours**.
+- The system must use **TypeORM** for database management.
+- The system must be developed in **TypeScript** and use **Express** as the backend framework.
+
+---
+
+### **Business Rules (BR)**
+
+#### **Car Registration**
+
+- The system must not allow the registration of cars with **duplicate license plates**.
+- Only **administrators** can register cars in the system.
+
+#### **Car Specification Management**
+
+- The system must not allow adding specifications to **unregistered cars**.
+- The system must prevent adding **duplicate specifications** to the same car.
+- Only **administrators** can add specifications to a car.
+
+#### **Car Image Upload**
+
+- Only **administrators** can upload car images.
+
+#### **Car Rental**
+
+- The system must require a **minimum rental period of 24 hours**.
+- The system must not allow a user to have **multiple open rentals**.
+- The system must not allow a **single car** to be rented by multiple users simultaneously.
+
+#### **Car Return**
+
+- If a car is returned **before 24 hours**, a full daily rate must be charged.
+- The system must charge an **extra fee for late returns**.
+
+#### **Password Recovery**
+
+- Users must be **required to enter a new password** when resetting their password.
+
+
+## Documentation
+To access the documentation and test the endpoints, make sure the application is running and open the following address in your browser: <code>http://localhost:3333/api-docs</code>
+
+![Screenshot from 2025-03-19 20-25-28](https://github.com/user-attachments/assets/0a7728f5-f7ef-46a9-a09e-2a54c4bebb96)
