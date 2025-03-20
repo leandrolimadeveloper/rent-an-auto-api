@@ -1,17 +1,16 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "RentCar Documentation",
-        "description": "This is an API for RentCar application",
-        "version": "1.0.0",
-        "contact": {
-            "email": "leandro@leandro.com"
-        }
+        "title": "Rent an Auto Documentation",
+        "description": "This is an API for Rent an Auto application",
+        "version": "1.0.0"
     },
     "paths": {
         "/categories": {
             "post": {
-                "tags": ["Category"],
+                "tags": [
+                    "Category"
+                ],
                 "summary": "Create a category",
                 "description": "Create a new category",
                 "security": [
@@ -50,7 +49,9 @@
                 }
             },
             "get": {
-                "tags": ["Category"],
+                "tags": [
+                    "Category"
+                ],
                 "summary": "List all categories",
                 "description": "List all categories",
                 "responses": {
@@ -80,7 +81,9 @@
         },
         "/categories/import": {
             "post": {
-                "tags": ["Category"],
+                "tags": [
+                    "Category"
+                ],
                 "summary": "Upload categories",
                 "description": "Upload categories",
                 "requestBody": {
@@ -107,7 +110,9 @@
         },
         "/specifications": {
             "post": {
-                "tags": ["Specifications"],
+                "tags": [
+                    "Specifications"
+                ],
                 "summary": "Create",
                 "description": "Create a new specification",
                 "requestBody": {
@@ -131,7 +136,9 @@
         },
         "/sessions": {
             "post": {
-                "tags": ["Session"],
+                "tags": [
+                    "Session"
+                ],
                 "summary": "Authentication user",
                 "description": "Authentication user",
                 "requestBody": {
@@ -141,7 +148,7 @@
                                 "type": "object",
                                 "properties": {
                                     "email": {
-                                        "type": "string" 
+                                        "type": "string"
                                     },
                                     "password": {
                                         "type": "string"
